@@ -1,0 +1,44 @@
+# Dados brutos e processados — nunca versionar (exceto placeholders)
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Resultados e figuras — gerados pelos notebooks, não versionar
+resultados/figuras/*
+!resultados/figuras/.gitkeep
+resultados/modelos/
+resultados/*.json
+resultados/*.csv
+
+# Pesos e checkpoints de modelos
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+# Ruff / Black / mypy
+.ruff_cache/
+.mypy_cache/
+
+# OS
+.DS_Store
+Thumbs.db
