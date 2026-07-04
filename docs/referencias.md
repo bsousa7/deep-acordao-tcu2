@@ -1,7 +1,6 @@
 # Referências Bibliográficas
 
-Herdadas do projeto original `deep-acordao-tcu`, agrupadas por domínio.
-Todas foram citadas em artefatos científicos e mantêm-se pertinentes ao pipeline v2.
+Referências utilizadas neste trabalho, agrupadas por domínio.
 
 ---
 
