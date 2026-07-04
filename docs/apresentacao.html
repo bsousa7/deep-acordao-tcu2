@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Learning · Acórdãos do TCU — Saúde e Educação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1E1814; --panel:#251E19; --cream:#ECE4D6; --sub:#9C9284; --mut:#82796C;
+    --gold:#C7A968; --terra:#C06A48; --line:#372F28;
+    --disp:'Fraunces',Georgia,serif; --body:'Inter',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--cream);font-family:var(--body);overflow:hidden;-webkit-font-smoothing:antialiased}
+  .progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0;z-index:60;transition:width .5s cubic-bezier(.2,.8,.2,1);opacity:.85}
+  .deck{position:relative;height:100vh;width:100vw}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(36px,6.5vw,110px);padding-top:clamp(72px,10vw,116px);padding-bottom:78px;
+    opacity:0;visibility:hidden;transform:translateY(12px);
+    transition:opacity .55s ease,transform .55s ease,visibility .55s}
+  .slide.active{opacity:1;visibility:visible;transform:none}
+  @media (prefers-reduced-motion:reduce){.slide{transition:opacity .2s}}
+  .eyebrow{position:absolute;top:clamp(30px,4.6vw,54px);left:clamp(36px,6.5vw,110px);
+    font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut)}
+  .counter{position:absolute;top:clamp(30px,4.6vw,54px);right:clamp(36px,6.5vw,110px);
+    font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--mut)}
+  .counter b{color:var(--cream)}
+  h1,h2{font-family:var(--disp);font-weight:500;line-height:1.04;letter-spacing:-.005em;color:var(--cream)}
+  h1 em,h2 em{font-style:italic;font-weight:400;color:var(--gold)}
+  h2{font-size:clamp(30px,4.4vw,54px);margin-bottom:20px}
+  .over{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:16px;display:block}
+  .lead{font-size:clamp(15.5px,1.5vw,18px);color:#CFC7B8;max-width:58ch;line-height:1.62}
+  .lead b{color:var(--cream);font-weight:500}
+  .g{color:var(--gold)} .t{color:var(--terra)}
+  .s-title h1{font-size:clamp(40px,7vw,98px);letter-spacing:-.015em}
+  .s-title .sub{margin-top:26px;font-size:clamp(16px,1.7vw,20px);color:#CFC7B8;max-width:56ch;line-height:1.55}
+  .s-title .by{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:12px;color:var(--mut);letter-spacing:.05em}
+  .row{display:grid;gap:clamp(30px,4.5vw,70px);align-items:center}
+  .row.two{grid-template-columns:1fr 1fr}
+  .row.leftwide{grid-template-columns:1.1fr .9fr}
+  @media(max-width:860px){.row.two,.row.leftwide{grid-template-columns:1fr;gap:26px}}
+  .sec{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);
+    padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+  .dl{display:grid;grid-template-columns:130px 1fr;gap:20px 22px;align-items:baseline}
+  .dl .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);padding-top:4px}
+  .dl .v h3{font-family:var(--disp);font-size:clamp(18px,1.8vw,21px);font-weight:500;color:var(--cream);line-height:1.1}
+  .dl .v h3.tr{color:var(--terra);font-style:italic;font-weight:400}
+  .dl .v p{font-size:13px;color:var(--sub);margin-top:3px;line-height:1.45}
+  .stat{border-left:2px solid var(--gold);padding-left:26px}
+  .stat .num{font-family:var(--disp);font-size:clamp(50px,7.6vw,98px);font-weight:500;line-height:.92;color:var(--cream)}
+  .stat .lab{font-size:clamp(13.5px,1.4vw,16px);color:var(--sub);margin-top:14px;line-height:1.5;max-width:32ch}
+  .stat .lab b{color:var(--cream)}
+  .distro{margin-top:24px}
+  .distro .track{display:flex;height:34px;border:1px solid var(--line);overflow:hidden;font-family:var(--mono);font-size:11.5px}
+  .distro .seg{display:flex;align-items:center;padding-left:11px;white-space:nowrap}
+  .distro .a{background:var(--gold);color:#241d15;flex:0 0 88%}
+  .distro .b{background:#7d6a44;color:var(--cream);flex:0 0 7%;font-size:10px;padding-left:6px}
+  .distro .c{background:var(--panel);color:var(--sub);flex:0 0 5%;font-size:9px;padding-left:4px;border-left:1px solid var(--line)}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--mut);margin-top:13px}
+  .legend i{display:inline-block;width:10px;height:10px;margin-right:8px;vertical-align:middle}
+  .bars{display:flex;flex-direction:column;gap:18px;font-family:var(--mono)}
+  .bar{display:grid;grid-template-columns:130px 1fr auto;align-items:center;gap:16px;font-size:12px}
+  .bar .lab{color:var(--mut);text-align:right;line-height:1.25}
+  .bar .track{height:10px;background:#2c251f}
+  .bar .fill{height:100%;background:var(--gold)}
+  .bar .fill.f2{background:#a8893a}
+  .bar .fill.f3{background:#7d6a44}
+  .bar .fill.f4{background:#5c4e35}
+  .bar .fill.f5{background:#3d3525}
+  .bar .val{font-size:15px;color:var(--cream);min-width:44px;text-align:right}
+  .chartnote{font-family:var(--mono);font-size:11px;color:var(--mut);margin-top:2px}
+  .callout{border:1px solid var(--line);background:var(--panel);padding:19px 22px;max-width:46ch}
+  .callout .big{font-family:var(--disp);font-size:26px;font-weight:500;font-style:italic;color:var(--gold);display:block;margin-bottom:6px}
+  .callout p{font-size:13.5px;color:var(--sub);line-height:1.55}
+  .callout p b{color:var(--cream)}
+  .callout.alert{border-color:var(--terra)}
+  .callout.alert .big{color:var(--terra)}
+  .flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:12px;margin:26px 0}
+  .flow .box{background:var(--panel);border:1px solid var(--line);padding:12px 15px;line-height:1.35;color:var(--cream)}
+  .flow .box small{color:var(--mut)}
+  .flow .box.k{background:var(--gold);color:#241d15;border-color:var(--gold)}
+  .flow .box.k small{color:#5c4a25}
+  .flow .box.alert{background:#3a2420;border-color:var(--terra);color:var(--terra)}
+  .flow .box.alert small{color:#7a4a3a}
+  .flow .arw{color:var(--terra)}
+  .mult{display:flex;gap:30px;flex-wrap:wrap;margin-top:22px}
+  .mult .m{border-left:2px solid var(--gold);padding-left:20px}
+  .mult .m .x{font-family:var(--disp);font-size:clamp(38px,4.6vw,56px);font-weight:500;color:var(--cream);line-height:.9}
+  .mult .m .x em{font-style:italic;color:var(--gold)}
+  .mult .m .d{font-family:var(--mono);font-size:12.5px;color:var(--sub);margin-top:8px;line-height:1.4}
+  .mult .m .d b{color:var(--cream)}
+  ul.clean{list-style:none}
+  ul.clean li{padding:14px 0;border-bottom:1px solid var(--line);font-size:clamp(14.5px,1.5vw,17px);line-height:1.5;color:#CFC7B8}
+  ul.clean li:first-child{border-top:1px solid var(--line)}
+  ul.clean li b{color:var(--cream);font-weight:500}
+  .pull{font-family:var(--disp);font-size:clamp(23px,3vw,34px);font-weight:500;color:var(--cream);line-height:1.15}
+  .pull em{font-style:italic;color:var(--gold)}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    border:1px solid var(--line);padding:5px 11px;display:inline-block;margin-bottom:20px}
+  .nav{position:fixed;right:clamp(20px,4vw,52px);bottom:26px;display:flex;gap:8px;z-index:55}
+  .nav button{width:40px;height:40px;border:1px solid var(--line);background:transparent;color:var(--gold);
+    font-size:18px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;font-family:var(--mono)}
+  .nav button:hover{border-color:var(--gold);background:var(--gold);color:var(--bg)}
+  .nav button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .dots{position:fixed;left:50%;transform:translateX(-50%);bottom:30px;display:flex;gap:8px;z-index:55}
+  .dots button{width:7px;height:7px;border-radius:50%;border:none;background:var(--line);padding:0;cursor:pointer;transition:.2s}
+  .dots button.on{background:var(--gold);transform:scale(1.35)}
+  .dots button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .hint{position:fixed;left:clamp(36px,6.5vw,110px);bottom:28px;font-family:var(--mono);font-size:11px;color:var(--mut);z-index:55}
+  .hint b{color:var(--sub)}
+  @media(max-width:860px){.hint{display:none}.dots{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 TITULO -->
+  <section class="slide s-title active" data-eyebrow="TCU · Jurimetria">
+    <div>
+      <div class="over">Ciencia de dados aplicada ao controle externo</div>
+      <h1>Deep learning para classificar<br><em>acordaos</em> do TCU</h1>
+      <p class="sub">Classificacao automatica de desfechos em processos de contas nas areas de Saude e Educacao — com correcao de vazamento e comparativo de cinco arquiteturas.</p>
+      <p class="by">BRUNO AIRES · CANDICE TRIGUEIRO · RAFAEL AYOROA — MESTRADO EM ADMINISTRACAO PUBLICA · IDP</p>
+    </div>
+  </section>
+
+  <!-- 2 PROBLEMA & OBJETIVO -->
+  <section class="slide" data-eyebrow="Problema & objetivo">
+    <div>
+      <h2>Prever o desfecho a partir do <em>texto</em></h2>
+      <p class="lead" style="margin-bottom:26px">Classificar cada processo de contas em tres desfechos possiveis, usando exclusivamente o texto da fundamentacao do relator — sem acesso ao veredito.</p>
+      <div class="row two">
+        <div class="dl">
+          <div class="k">Entrada</div><div class="v"><h3>Voto do relator</h3><p>fundamentacao sem dispositivo</p></div>
+          <div class="k">Saida</div><div class="v"><h3 class="tr">Irregular · Ressalva · Regular</h3><p>desfecho do julgamento</p></div>
+        </div>
+        <div class="dl">
+          <div class="k">Escopo</div><div class="v"><h3>Saude e Educacao</h3><p>45+ termos tematicos</p></div>
+          <div class="k">Uso</div><div class="v"><h3>Apoio a priorizacao</h3><p>nao substitui o julgamento</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 DADOS -->
+  <section class="slide" data-eyebrow="Dados">
+    <div>
+      <h2>Nove anos de <em>acordaos</em> do TCU</h2>
+      <div class="row leftwide" style="margin-top:12px">
+        <div>
+          <div class="sec">A base</div>
+          <div class="dl">
+            <div class="k">Periodo</div><div class="v"><h3>2016 – 2024</h3><p>dados abertos oficiais do TCU</p></div>
+            <div class="k">Volume</div><div class="v"><h3>3.644 acordaos</h3><p>Saude e Educacao, rotulados</p></div>
+            <div class="k">Split</div><div class="v"><h3>Temporal</h3><p>treino ≤2022 · val 2023 · teste 2024</p></div>
+          </div>
+        </div>
+        <div>
+          <div class="distro">
+            <div class="track"><div class="seg a">Irregular · 90,8%</div><div class="seg b">6,6%</div><div class="seg c">2,6%</div></div>
+            <div class="legend">
+              <span><i style="background:var(--gold)"></i>Irregular · 3.310</span>
+              <span><i style="background:#7d6a44"></i>Ressalva · 241</span>
+              <span><i style="background:var(--panel);border:1px solid var(--line)"></i>Regular · 93</span>
+            </div>
+          </div>
+          <div class="callout" style="margin-top:22px">
+            <span class="big">Desafio</span>
+            <p>Desbalanceamento extremo: <b>91%</b> de uma classe. Sem ponderacao, os modelos ignoram as classes raras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 O VAZAMENTO -->
+  <section class="slide" data-eyebrow="Vazamento">
+    <div class="row two">
+      <div>
+        <span class="kicker">A descoberta critica</span>
+        <h2>O campo SUMARIO <em>entrega</em> o veredito</h2>
+        <p class="lead">O SUMARIO e redigido pela Secretaria do TCU <b>apos a decisao</b> e contem literalmente o texto do julgamento. Usar esse campo como feature e entregar a resposta ao modelo antes da prova.</p>
+        <div class="callout alert" style="margin-top:22px">
+          <span class="big">Exemplo real</span>
+          <p>"TOMADA DE CONTAS ESPECIAL. <b>CONTAS IRREGULARES.</b> DEBITO. MULTA."</p>
+        </div>
+      </div>
+      <div>
+        <div class="sec">Auditoria de contaminacao</div>
+        <div style="font-family:var(--mono);font-size:13px;margin-top:16px">
+          <div style="display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)">
+            <span style="color:var(--sub)">SUMARIO</span>
+            <span style="color:var(--terra);font-weight:700">98,1% contaminado</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)">
+            <span style="color:var(--sub)">VOTO (com dispositivo)</span>
+            <span style="color:var(--terra)">26,0% contaminado</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)">
+            <span style="color:var(--sub)">VOTO_LIMPO (feature)</span>
+            <span style="color:var(--gold);font-weight:700">0,0% — PASSOU</span>
+          </div>
+        </div>
+        <p class="chartnote" style="margin-top:14px">Gate automatico: pipeline aborta se fracao > 0</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 METODOLOGIA -->
+  <section class="slide" data-eyebrow="Metodologia">
+    <div class="row leftwide">
+      <div>
+        <span class="kicker">Construcao da feature</span>
+        <h2>VOTO_LIMPO — <em>defesa</em><br>em profundidade</h2>
+        <p class="lead" style="margin-bottom:6px">Tres camadas de protecao garantem que nenhum sinal do veredito sobreviva na feature de entrada.</p>
+        <div class="flow">
+          <span class="box">VOTO<br><small>campo bruto</small></span><span class="arw">&rarr;</span>
+          <span class="box">strip_html<br><small>remove tags</small></span><span class="arw">&rarr;</span>
+          <span class="box alert">remover<br>dispositivo<br><small>trunca no ACORDAM</small></span><span class="arw">&rarr;</span>
+          <span class="box alert">mask termos<br><small>&rarr; [DECISAO]</small></span><span class="arw">&rarr;</span>
+          <span class="box k">VOTO_LIMPO<br><small>0% vazamento</small></span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="num">0,0%</div>
+        <div class="lab">de termos de veredito na feature final<br><b>verificado por auditoria automatica antes de cada treino</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 MODELOS -->
+  <section class="slide" data-eyebrow="Modelos">
+    <div>
+      <span class="kicker">Comparativo de arquiteturas</span>
+      <h2>Cinco modelos sobre <em>VOTO_LIMPO</em></h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:22px;font-family:var(--mono);font-size:12px">
+        <div style="border:1px solid var(--gold);padding:16px;background:var(--panel)">
+          <div style="color:var(--gold);font-size:11px;letter-spacing:.15em;margin-bottom:8px">BASELINE</div>
+          <div style="color:var(--cream);font-size:15px;font-family:var(--disp)">TF-IDF + LogReg</div>
+          <div style="color:var(--sub);margin-top:6px">50k features, bigramas<br>documento inteiro</div>
+        </div>
+        <div style="border:1px solid var(--line);padding:16px;background:var(--panel)">
+          <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:8px">CNN</div>
+          <div style="color:var(--cream);font-size:15px;font-family:var(--disp)">TextCNN</div>
+          <div style="color:var(--sub);margin-top:6px">Kim 2014, k=3,4,5<br>300 palavras</div>
+        </div>
+        <div style="border:1px solid var(--line);padding:16px;background:var(--panel)">
+          <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:8px">TRANSFORMER</div>
+          <div style="color:var(--cream);font-size:15px;font-family:var(--disp)">LegalBert + LoRA</div>
+          <div style="color:var(--sub);margin-top:6px">512 tokens truncados<br>fine-tune com adapters</div>
+        </div>
+        <div style="border:1px solid var(--line);padding:16px;background:var(--panel)">
+          <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:8px">HEAD+TAIL</div>
+          <div style="color:var(--cream);font-size:15px;font-family:var(--disp)">LegalBert H+T</div>
+          <div style="color:var(--sub);margin-top:6px">256 inicio + 254 fim<br>captura conclusao</div>
+        </div>
+        <div style="border:1px solid var(--line);padding:16px;background:var(--panel)">
+          <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:8px">HIERARQUICO</div>
+          <div style="color:var(--cream);font-size:15px;font-family:var(--disp)">BERT + Attention</div>
+          <div style="color:var(--sub);margin-top:6px">32 sentencas x 128 tok<br>documento inteiro</div>
+        </div>
+      </div>
+      <p class="chartnote" style="margin-top:16px">Todos com pesos de classe · K-Fold estratificado 5x · LegalBert-pt (dominguesm)</p>
+    </div>
+  </section>
+
+  <!-- 7 AVALIACAO -->
+  <section class="slide" data-eyebrow="Avaliacao">
+    <div class="row two">
+      <div>
+        <h2>Protocolo de <em>avaliacao</em></h2>
+        <div class="sec" style="margin-top:8px">O treino</div>
+        <div class="dl">
+          <div class="k">Validacao</div><div class="v"><h3>5-fold estratificado</h3><p>predicoes out-of-fold</p></div>
+          <div class="k">Desbalanco</div><div class="v"><h3>Class weights</h3><p>w_c = N / (K * n_c)</p></div>
+          <div class="k">Metrica</div><div class="v"><h3 class="tr">F1-macro</h3><p>pesa as 3 classes por igual</p></div>
+          <div class="k">Hold-out</div><div class="v"><h3>Temporal 2024</h3><p>avaliacao final</p></div>
+        </div>
+      </div>
+      <div>
+        <span class="kicker">Por que F1-macro?</span>
+        <p class="lead">Com 91% de uma classe, a acuracia engana: prever sempre "Irregular" da <b class="g">0,91</b> de acuracia — mas F1-macro de apenas <b class="g">0,32</b>. O F1-macro revela se o modelo aprende de fato as classes raras.</p>
+        <div class="callout" style="margin-top:20px">
+          <span class="big">0,33</span>
+          <p>Piso trivial — classificador aleatorio com 3 classes. Qualquer resultado acima disso indica aprendizado real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 RESULTADOS -->
+  <section class="slide" data-eyebrow="Resultados">
+    <div class="row two">
+      <div>
+        <span class="kicker">F1-macro · 5-fold</span>
+        <h2>O baseline <em>vence</em></h2>
+        <p class="lead" style="margin-top:10px">O modelo linear classico (TF-IDF + LogReg) supera todos os modelos profundos — incluindo LegalBert com fine-tuning.</p>
+        <p class="chartnote" style="margin-top:20px">IC 95% do baseline: [0.404, 0.579]<br>Hold-out temporal (2024): F1 = 0.412</p>
+      </div>
+      <div class="bars">
+        <div class="bar"><span class="lab">TF-IDF +<br>LogReg</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">0.491</span></div>
+        <div class="bar"><span class="lab">TextCNN</span><span class="track"><span class="fill f2" style="width:74.7%"></span></span><span class="val">0.367</span></div>
+        <div class="bar"><span class="lab">LegalBert<br>Head+Tail</span><span class="track"><span class="fill f3" style="width:68.2%"></span></span><span class="val">0.335</span></div>
+        <div class="bar"><span class="lab">LegalBert<br>Truncado</span><span class="track"><span class="fill f4" style="width:67.0%"></span></span><span class="val">0.329</span></div>
+        <div class="bar"><span class="lab"><span style="color:var(--mut);font-size:10px">Random<br>(3 classes)</span></span><span class="track"><span class="fill f5" style="width:67.8%"></span></span><span class="val" style="color:var(--mut)">0.333</span></div>
+        <p class="chartnote">K-Fold 5x · VOTO_LIMPO · pesos de classe</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 INTERPRETACAO -->
+  <section class="slide" data-eyebrow="Interpretacao">
+    <div>
+      <h2>Por que o baseline <em>supera</em><br>deep learning?</h2>
+      <ul class="clean" style="margin-top:20px;max-width:82ch">
+        <li><b>Corpus pequeno + desbalanceamento extremo</b> — apenas ~240 exemplos de Ressalva e ~93 de Regular. Insuficiente para fine-tuning robusto de 110M parametros.</li>
+        <li><b>Sinal predominantemente lexical</b> — presenca/ausencia de termos especificos e mais discriminativa que representacoes semanticas densas neste corpus.</li>
+        <li><b>TF-IDF ve o documento inteiro</b> — sem truncagem a 512 tokens. BERT perde informacao em votos longos (mediana ~1.800 tokens).</li>
+      </ul>
+      <div class="mult" style="margin-top:30px">
+        <div class="m"><div class="x">1.800</div><div class="d">mediana de tokens<br><b>por voto</b></div></div>
+        <div class="m"><div class="x">512</div><div class="d">limite do BERT<br><b>72% truncados</b></div></div>
+        <div class="m"><div class="x">93</div><div class="d">exemplos de Regular<br><b>classe mais rara</b></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 IMPACTO DO VAZAMENTO -->
+  <section class="slide" data-eyebrow="Impacto">
+    <div class="row two">
+      <div>
+        <span class="kicker">Antes vs depois</span>
+        <h2>O impacto da <em>correcao</em></h2>
+        <p class="lead">A queda F1 ~0.99 para 0.491 demonstra que os resultados anteriores eram <b>inteiramente inflados</b> por leakage. O F1=0.491 e o resultado honesto.</p>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:13px">
+          <div style="padding:18px;border:1px solid var(--terra);margin-bottom:14px">
+            <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:6px">ANTES — COM VAZAMENTO</div>
+            <div style="font-family:var(--disp);font-size:42px;color:var(--terra)">~0.99</div>
+            <div style="color:var(--sub);margin-top:4px">feature: SUMARIO (contaminado)</div>
+          </div>
+          <div style="padding:18px;border:1px solid var(--gold)">
+            <div style="color:var(--gold);font-size:11px;letter-spacing:.15em;margin-bottom:6px">DEPOIS — SEM VAZAMENTO</div>
+            <div style="font-family:var(--disp);font-size:42px;color:var(--gold)">0.491</div>
+            <div style="color:var(--sub);margin-top:4px">feature: VOTO_LIMPO (auditado)</div>
+          </div>
+          <div style="padding:14px;border:1px solid var(--line);margin-top:14px;background:var(--panel)">
+            <div style="color:var(--mut);font-size:11px;letter-spacing:.15em;margin-bottom:6px">SEM PESOS DE CLASSE</div>
+            <div style="font-family:var(--disp);font-size:28px;color:var(--mut)">0.317</div>
+            <div style="color:var(--mut);margin-top:4px">classes raras colapsam a F1=0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 F1 POR CLASSE -->
+  <section class="slide" data-eyebrow="Classes">
+    <div class="row two">
+      <div>
+        <span class="kicker">Melhor modelo — TF-IDF</span>
+        <h2>F1 por <em>classe</em></h2>
+        <p class="lead">A classe majoritaria e bem classificada. As raras sao o desafio real — e onde a ponderacao de classes faz a diferenca.</p>
+      </div>
+      <div>
+        <div class="bars" style="gap:24px">
+          <div class="bar"><span class="lab">Irregular<br><small style="font-size:10px">n=3.310</small></span><span class="track" style="height:14px"><span class="fill" style="width:95.8%"></span></span><span class="val" style="font-size:18px">0.958</span></div>
+          <div class="bar"><span class="lab">Ressalva<br><small style="font-size:10px">n=241</small></span><span class="track" style="height:14px"><span class="fill f3" style="width:39.9%"></span></span><span class="val" style="font-size:18px">0.399</span></div>
+          <div class="bar"><span class="lab">Regular<br><small style="font-size:10px">n=93</small></span><span class="track" style="height:14px"><span class="fill f5" style="width:11.6%"></span></span><span class="val" style="font-size:18px">0.116</span></div>
+        </div>
+        <div class="callout" style="margin-top:26px">
+          <span class="big">O gargalo e dado</span>
+          <p>Com apenas <b>93 exemplos</b> de Regular, nenhum modelo — linear ou profundo — consegue aprender essa classe de forma robusta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 CONCLUSAO -->
+  <section class="slide" data-eyebrow="Conclusao">
+    <div>
+      <span class="tag">Conclusao</span>
+      <h2 style="font-size:clamp(27px,4.4vw,50px)">Resultado <em>honesto</em>,<br>nao resultado inflado</h2>
+      <ul class="clean" style="margin-top:24px;max-width:82ch">
+        <li><b>Correcao de vazamento e inegociavel</b> — F1 ~0.99 com SUMARIO era ilusao. O pipeline audita automaticamente antes de treinar.</li>
+        <li><b>Baseline classico supera deep learning</b> — TF-IDF 0.491 contra LegalBert 0.335. Corpus pequeno + desbalanceamento extremo favorece modelo linear.</li>
+        <li><b>Ponderacao de classes e requisito</b> — sem ela, F1 cai de 0.491 para 0.317 (classes raras colapsam a zero).</li>
+        <li><b>O gargalo e a escassez de dados nas classes raras</b> — nao a capacidade da arquitetura.</li>
+      </ul>
+      <p class="chartnote" style="margin-top:26px">Pipeline completo: github.com/bsousa7/deep-acordao-tcu2 · Dados: Portal de Dados Abertos do TCU</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="nav"><button id="prev" aria-label="Slide anterior">&#8249;</button><button id="next" aria-label="Proximo slide">&#8250;</button></div>
+<div class="hint"><b>&larr; &rarr;</b> navegar · <b>F</b> tela cheia</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),total=slides.length,cur=0;
+  var progress=document.getElementById('progress'),dotsWrap=document.getElementById('dots');
+  slides.forEach(function(s,i){
+    var eb=document.createElement('div');eb.className='eyebrow';eb.textContent=s.dataset.eyebrow||'';
+    var ct=document.createElement('div');ct.className='counter';ct.innerHTML='<b>'+String(i+1).padStart(2,'0')+'</b> / '+String(total).padStart(2,'0');
+    s.appendChild(eb);s.appendChild(ct);
+    var d=document.createElement('button');d.setAttribute('aria-label','Ir para slide '+(i+1));d.addEventListener('click',function(){go(i)});dotsWrap.appendChild(d);
+  });
+  var dots=[].slice.call(dotsWrap.children);
+  function go(n){cur=Math.max(0,Math.min(total-1,n));
+    slides.forEach(function(s,i){s.classList.toggle('active',i===cur)});
+    dots.forEach(function(d,i){d.classList.toggle('on',i===cur)});
+    progress.style.width=((cur+1)/total*100)+'%';}
+  function next(){go(cur+1)}function prev(){go(cur-1)}
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next()}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
+    else if(e.key==='Home'){go(0)}else if(e.key==='End'){go(total-1)}
+    else if(e.key==='f'||e.key==='F'){toggleFS()}
+  });
+  var tx0=null;
+  document.addEventListener('touchstart',function(e){tx0=e.changedTouches[0].clientX});
+  document.addEventListener('touchend',function(e){if(tx0===null)return;var dx=e.changedTouches[0].clientX-tx0;if(Math.abs(dx)>50){dx<0?next():prev()}tx0=null});
+  function toggleFS(){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}else{document.exitFullscreen&&document.exitFullscreen()}}
+  go(0);
+})();
+</script>
+</body>
+</html>
