@@ -131,7 +131,7 @@ Três fatores explicam:
 
 A estratégia Head+Tail (início + fim do voto) deu ganho marginal (+0.006) sobre
 truncagem simples. O modelo hierárquico (que processa o voto inteiro via 32
-sentenças) colapsou para a classe majoritária (F1=0.317 ≈ piso aleatório),
+sentenças) colapsou para a classe majoritária (F1=0.317 ≈ piso majoritário),
 evidenciando que o gargalo principal não é perda de informação posicional
 nem cobertura do documento, mas insuficiência de exemplos para fine-tuning.
 

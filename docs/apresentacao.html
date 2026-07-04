@@ -289,7 +289,7 @@
         <p class="lead">Com 91% de uma classe, a acurácia engana: prever sempre "Irregular" dá <b class="g">0,91</b> de acurácia — mas F1-macro de apenas <b class="g">0,32</b>. O F1-macro revela se o modelo aprende de fato as classes raras.</p>
         <div class="callout" style="margin-top:20px">
           <span class="big">0,33</span>
-          <p>Piso trivial — classificador aleatório com 3 classes. Qualquer resultado acima disso indica aprendizado real.</p>
+          <p>Piso trivial — modelo que prevê sempre a classe majoritária (F1≈0,95 para Irregular, zero nas raras → macro ≈ 0,33). Qualquer resultado acima disso indica aprendizado real.</p>
         </div>
       </div>
     </div>
@@ -310,7 +310,7 @@
         <div class="bar"><span class="lab">LegalBert<br>Head+Tail</span><span class="track"><span class="fill f3" style="width:68.2%"></span></span><span class="val">0.335</span></div>
         <div class="bar"><span class="lab">LegalBert<br>Truncado</span><span class="track"><span class="fill f4" style="width:67.0%"></span></span><span class="val">0.329</span></div>
         <div class="bar"><span class="lab">Hierárquico<br><small style="font-size:9px">(colapsou)</small></span><span class="track"><span class="fill f5" style="width:64.6%"></span></span><span class="val" style="color:var(--mut)">0.317</span></div>
-        <p class="chartnote">K-Fold 5× · VOTO_LIMPO · pesos de classe · piso aleatório ≈ 0.33</p>
+        <p class="chartnote">K-Fold 5× · VOTO_LIMPO · pesos de classe · piso majoritário ≈ 0.33</p>
       </div>
     </div>
   </section>
