@@ -15,6 +15,9 @@ resultados/modelos/
 *.safetensors
 *.ckpt
 
+# Node
+node_modules/
+
 # Python
 __pycache__/
 *.pyc
