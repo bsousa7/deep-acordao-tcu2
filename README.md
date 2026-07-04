@@ -36,7 +36,8 @@ Etapa 5: Split temporal (treino ≤ 2022 | val=2023 | teste=2024) → data/proce
 Etapa 6: TF-IDF + LogReg com class_weight='balanced' (5-fold + hold-out temporal)
 Etapa 7: TextCNN com CrossEntropyLoss ponderada (5-fold)
 Etapa 8 (opcional): LegalBert-pt + LoRA com WeightedCE ou Focal Loss (GPU)
-Etapa 9: Métricas em resultados/metricas_*.json
+Etapa 9 (opcional): Head+Tail + Hierárquico para documentos longos (GPU)
+Etapa 10: Métricas em resultados/metricas_*.json + comparativo final
 ```
 
 ---
@@ -57,14 +58,16 @@ deep-acordao-tcu2/
 │   │   ├── baseline.py                  ← TF-IDF + LogReg (class_weight='balanced')
 │   │   ├── textcnn.py                   ← TextCNN (CE ponderada)
 │   │   ├── focal_loss.py                ← FocalLoss (Lin et al., 2017)
-│   │   └── transformer.py               ← LegalBert-pt + LoRA + Weighted/Focal
+│   │   ├── transformer.py               ← LegalBert-pt + LoRA + Weighted/Focal
+│   │   └── hierarquico.py               ← Head+Tail + Hierárquico (docs longos)
 │   └── avaliacao/metricas.py            ← métricas, matriz de confusão, JSON
 ├── notebooks/
 │   ├── 00_visao_geral.ipynb
 │   ├── 01_pipeline_limpo.ipynb
 │   ├── 02_baseline_ponderado.ipynb
 │   ├── 03_textcnn_ponderado.ipynb
-│   └── 04_legalbert_ponderado.ipynb      (opcional, requer GPU)
+│   ├── 04_legalbert_ponderado.ipynb      (opcional, requer GPU)
+│   └── 05_hierarquico_comparativo.ipynb  (requer GPU, comparativo final)
 ├── tests/test_pipeline.py               ← 13 testes unitários (sem GPU/CSV real)
 ├── docs/{referencias,decisoes}.md
 └── resultados/                          ← vazio até a execução dos notebooks
