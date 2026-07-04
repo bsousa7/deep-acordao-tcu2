@@ -121,13 +121,13 @@
 <div class="progress" id="progress"></div>
 <div class="deck" id="deck">
 
-  <!-- 1 TITULO -->
+  <!-- 1 TÍTULO -->
   <section class="slide s-title active" data-eyebrow="TCU · Jurimetria">
     <div>
-      <div class="over">Ciencia de dados aplicada ao controle externo</div>
-      <h1>Deep learning para classificar<br><em>acordaos</em> do TCU</h1>
-      <p class="sub">Classificacao automatica de desfechos em processos de contas nas areas de Saude e Educacao — com correcao de vazamento e comparativo de cinco arquiteturas.</p>
-      <p class="by">BRUNO AIRES · CANDICE TRIGUEIRO · RAFAEL AYOROA — MESTRADO EM ADMINISTRACAO PUBLICA · IDP</p>
+      <div class="over">Ciência de dados aplicada ao controle externo</div>
+      <h1>Deep learning para classificar<br><em>acórdãos</em> do TCU</h1>
+      <p class="sub">Classificação automática de desfechos em processos de contas nas áreas de Saúde e Educação — com correção de vazamento e comparativo de cinco arquiteturas.</p>
+      <p class="by">BRUNO AIRES · CANDICE TRIGUEIRO · RAFAEL AYOROA — MESTRADO EM ADMINISTRAÇÃO PÚBLICA · IDP</p>
     </div>
   </section>
 
@@ -135,15 +135,15 @@
   <section class="slide" data-eyebrow="Problema & objetivo">
     <div>
       <h2>Prever o desfecho a partir do <em>texto</em></h2>
-      <p class="lead" style="margin-bottom:26px">Classificar cada processo de contas em tres desfechos possiveis, usando exclusivamente o texto da fundamentacao do relator — sem acesso ao veredito.</p>
+      <p class="lead" style="margin-bottom:26px">Classificar cada processo de contas em três desfechos possíveis, usando exclusivamente o texto da fundamentação do relator — sem acesso ao veredito.</p>
       <div class="row two">
         <div class="dl">
-          <div class="k">Entrada</div><div class="v"><h3>Voto do relator</h3><p>fundamentacao sem dispositivo</p></div>
-          <div class="k">Saida</div><div class="v"><h3 class="tr">Irregular · Ressalva · Regular</h3><p>desfecho do julgamento</p></div>
+          <div class="k">Entrada</div><div class="v"><h3>Voto do relator</h3><p>fundamentação sem dispositivo</p></div>
+          <div class="k">Saída</div><div class="v"><h3 class="tr">Irregular · Ressalva · Regular</h3><p>desfecho do julgamento</p></div>
         </div>
         <div class="dl">
-          <div class="k">Escopo</div><div class="v"><h3>Saude e Educacao</h3><p>45+ termos tematicos</p></div>
-          <div class="k">Uso</div><div class="v"><h3>Apoio a priorizacao</h3><p>nao substitui o julgamento</p></div>
+          <div class="k">Escopo</div><div class="v"><h3>Saúde e Educação</h3><p>45+ termos temáticos</p></div>
+          <div class="k">Uso</div><div class="v"><h3>Apoio à priorização</h3><p>não substitui o julgamento</p></div>
         </div>
       </div>
     </div>
@@ -152,13 +152,13 @@
   <!-- 3 DADOS -->
   <section class="slide" data-eyebrow="Dados">
     <div>
-      <h2>Nove anos de <em>acordaos</em> do TCU</h2>
+      <h2>Nove anos de <em>acórdãos</em> do TCU</h2>
       <div class="row leftwide" style="margin-top:12px">
         <div>
           <div class="sec">A base</div>
           <div class="dl">
-            <div class="k">Periodo</div><div class="v"><h3>2016 – 2024</h3><p>dados abertos oficiais do TCU</p></div>
-            <div class="k">Volume</div><div class="v"><h3>3.644 acordaos</h3><p>Saude e Educacao, rotulados</p></div>
+            <div class="k">Período</div><div class="v"><h3>2016 – 2024</h3><p>dados abertos oficiais do TCU</p></div>
+            <div class="k">Volume</div><div class="v"><h3>3.644 acórdãos</h3><p>Saúde e Educação, rotulados</p></div>
             <div class="k">Split</div><div class="v"><h3>Temporal</h3><p>treino ≤2022 · val 2023 · teste 2024</p></div>
           </div>
         </div>
@@ -173,7 +173,7 @@
           </div>
           <div class="callout" style="margin-top:22px">
             <span class="big">Desafio</span>
-            <p>Desbalanceamento extremo: <b>91%</b> de uma classe. Sem ponderacao, os modelos ignoram as classes raras.</p>
+            <p>Desbalanceamento extremo: <b>91%</b> de uma classe. Sem ponderação, os modelos ignoram as classes raras.</p>
           </div>
         </div>
       </div>
@@ -184,19 +184,19 @@
   <section class="slide" data-eyebrow="Vazamento">
     <div class="row two">
       <div>
-        <span class="kicker">A descoberta critica</span>
-        <h2>O campo SUMARIO <em>entrega</em> o veredito</h2>
-        <p class="lead">O SUMARIO e redigido pela Secretaria do TCU <b>apos a decisao</b> e contem literalmente o texto do julgamento. Usar esse campo como feature e entregar a resposta ao modelo antes da prova.</p>
+        <span class="kicker">A descoberta crítica</span>
+        <h2>O campo SUMÁRIO <em>entrega</em> o veredito</h2>
+        <p class="lead">O SUMÁRIO é redigido pela Secretaria do TCU <b>após a decisão</b> e contém literalmente o texto do julgamento. Usar esse campo como feature é entregar a resposta ao modelo antes da prova.</p>
         <div class="callout alert" style="margin-top:22px">
           <span class="big">Exemplo real</span>
-          <p>"TOMADA DE CONTAS ESPECIAL. <b>CONTAS IRREGULARES.</b> DEBITO. MULTA."</p>
+          <p>"TOMADA DE CONTAS ESPECIAL. <b>CONTAS IRREGULARES.</b> DÉBITO. MULTA."</p>
         </div>
       </div>
       <div>
-        <div class="sec">Auditoria de contaminacao</div>
+        <div class="sec">Auditoria de contaminação</div>
         <div style="font-family:var(--mono);font-size:13px;margin-top:16px">
           <div style="display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)">
-            <span style="color:var(--sub)">SUMARIO</span>
+            <span style="color:var(--sub)">SUMÁRIO</span>
             <span style="color:var(--terra);font-weight:700">98,1% contaminado</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)">
@@ -208,7 +208,7 @@
             <span style="color:var(--gold);font-weight:700">0,0% — PASSOU</span>
           </div>
         </div>
-        <p class="chartnote" style="margin-top:14px">Gate automatico: pipeline aborta se fracao > 0</p>
+        <p class="chartnote" style="margin-top:14px">Gate automático: pipeline aborta se fração > 0</p>
       </div>
     </div>
   </section>
@@ -217,20 +217,20 @@
   <section class="slide" data-eyebrow="Metodologia">
     <div class="row leftwide">
       <div>
-        <span class="kicker">Construcao da feature</span>
+        <span class="kicker">Construção da feature</span>
         <h2>VOTO_LIMPO — <em>defesa</em><br>em profundidade</h2>
-        <p class="lead" style="margin-bottom:6px">Tres camadas de protecao garantem que nenhum sinal do veredito sobreviva na feature de entrada.</p>
+        <p class="lead" style="margin-bottom:6px">Três camadas de proteção garantem que nenhum sinal do veredito sobreviva na feature de entrada.</p>
         <div class="flow">
           <span class="box">VOTO<br><small>campo bruto</small></span><span class="arw">&rarr;</span>
           <span class="box">strip_html<br><small>remove tags</small></span><span class="arw">&rarr;</span>
-          <span class="box alert">remover<br>dispositivo<br><small>trunca no ACORDAM</small></span><span class="arw">&rarr;</span>
-          <span class="box alert">mask termos<br><small>&rarr; [DECISAO]</small></span><span class="arw">&rarr;</span>
+          <span class="box alert">remover<br>dispositivo<br><small>trunca no ACÓRDÃO</small></span><span class="arw">&rarr;</span>
+          <span class="box alert">mask termos<br><small>&rarr; [DECISÃO]</small></span><span class="arw">&rarr;</span>
           <span class="box k">VOTO_LIMPO<br><small>0% vazamento</small></span>
         </div>
       </div>
       <div class="stat">
         <div class="num">0,0%</div>
-        <div class="lab">de termos de veredito na feature final<br><b>verificado por auditoria automatica antes de cada treino</b></div>
+        <div class="lab">de termos de veredito na feature final<br><b>verificado por auditoria automática antes de cada treino</b></div>
       </div>
     </div>
   </section>
@@ -259,37 +259,37 @@
         <div style="border:1px solid var(--line);padding:16px;background:var(--panel)">
           <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:8px">HEAD+TAIL</div>
           <div style="color:var(--cream);font-size:15px;font-family:var(--disp)">LegalBert H+T</div>
-          <div style="color:var(--sub);margin-top:6px">256 inicio + 254 fim<br>captura conclusao</div>
+          <div style="color:var(--sub);margin-top:6px">256 início + 254 fim<br>captura conclusão</div>
         </div>
         <div style="border:1px solid var(--line);padding:16px;background:var(--panel)">
-          <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:8px">HIERARQUICO</div>
+          <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:8px">HIERÁRQUICO</div>
           <div style="color:var(--cream);font-size:15px;font-family:var(--disp)">BERT + Attention</div>
-          <div style="color:var(--sub);margin-top:6px">32 sentencas x 128 tok<br>documento inteiro</div>
+          <div style="color:var(--sub);margin-top:6px">32 sentenças × 128 tok<br>documento inteiro</div>
         </div>
       </div>
-      <p class="chartnote" style="margin-top:16px">Todos com pesos de classe · K-Fold estratificado 5x · LegalBert-pt (dominguesm)</p>
+      <p class="chartnote" style="margin-top:16px">Todos com pesos de classe · K-Fold estratificado 5× · LegalBert-pt (dominguesm)</p>
     </div>
   </section>
 
-  <!-- 7 AVALIACAO -->
-  <section class="slide" data-eyebrow="Avaliacao">
+  <!-- 7 AVALIAÇÃO -->
+  <section class="slide" data-eyebrow="Avaliação">
     <div class="row two">
       <div>
-        <h2>Protocolo de <em>avaliacao</em></h2>
+        <h2>Protocolo de <em>avaliação</em></h2>
         <div class="sec" style="margin-top:8px">O treino</div>
         <div class="dl">
-          <div class="k">Validacao</div><div class="v"><h3>5-fold estratificado</h3><p>predicoes out-of-fold</p></div>
-          <div class="k">Desbalanco</div><div class="v"><h3>Class weights</h3><p>w_c = N / (K * n_c)</p></div>
-          <div class="k">Metrica</div><div class="v"><h3 class="tr">F1-macro</h3><p>pesa as 3 classes por igual</p></div>
-          <div class="k">Hold-out</div><div class="v"><h3>Temporal 2024</h3><p>avaliacao final</p></div>
+          <div class="k">Validação</div><div class="v"><h3>5-fold estratificado</h3><p>predições out-of-fold</p></div>
+          <div class="k">Desbalanço</div><div class="v"><h3>Class weights</h3><p>w_c = N / (K × n_c)</p></div>
+          <div class="k">Métrica</div><div class="v"><h3 class="tr">F1-macro</h3><p>pesa as 3 classes por igual</p></div>
+          <div class="k">Hold-out</div><div class="v"><h3>Temporal 2024</h3><p>avaliação final</p></div>
         </div>
       </div>
       <div>
         <span class="kicker">Por que F1-macro?</span>
-        <p class="lead">Com 91% de uma classe, a acuracia engana: prever sempre "Irregular" da <b class="g">0,91</b> de acuracia — mas F1-macro de apenas <b class="g">0,32</b>. O F1-macro revela se o modelo aprende de fato as classes raras.</p>
+        <p class="lead">Com 91% de uma classe, a acurácia engana: prever sempre "Irregular" dá <b class="g">0,91</b> de acurácia — mas F1-macro de apenas <b class="g">0,32</b>. O F1-macro revela se o modelo aprende de fato as classes raras.</p>
         <div class="callout" style="margin-top:20px">
           <span class="big">0,33</span>
-          <p>Piso trivial — classificador aleatorio com 3 classes. Qualquer resultado acima disso indica aprendizado real.</p>
+          <p>Piso trivial — classificador aleatório com 3 classes. Qualquer resultado acima disso indica aprendizado real.</p>
         </div>
       </div>
     </div>
@@ -301,7 +301,7 @@
       <div>
         <span class="kicker">F1-macro · 5-fold</span>
         <h2>O baseline <em>vence</em></h2>
-        <p class="lead" style="margin-top:10px">O modelo linear classico (TF-IDF + LogReg) supera todos os modelos profundos — incluindo LegalBert com fine-tuning.</p>
+        <p class="lead" style="margin-top:10px">O modelo linear clássico (TF-IDF + LogReg) supera todos os modelos profundos — incluindo LegalBert com fine-tuning.</p>
         <p class="chartnote" style="margin-top:20px">IC 95% do baseline: [0.404, 0.579]<br>Hold-out temporal (2024): F1 = 0.412</p>
       </div>
       <div class="bars">
@@ -310,19 +310,19 @@
         <div class="bar"><span class="lab">LegalBert<br>Head+Tail</span><span class="track"><span class="fill f3" style="width:68.2%"></span></span><span class="val">0.335</span></div>
         <div class="bar"><span class="lab">LegalBert<br>Truncado</span><span class="track"><span class="fill f4" style="width:67.0%"></span></span><span class="val">0.329</span></div>
         <div class="bar"><span class="lab"><span style="color:var(--mut);font-size:10px">Random<br>(3 classes)</span></span><span class="track"><span class="fill f5" style="width:67.8%"></span></span><span class="val" style="color:var(--mut)">0.333</span></div>
-        <p class="chartnote">K-Fold 5x · VOTO_LIMPO · pesos de classe</p>
+        <p class="chartnote">K-Fold 5× · VOTO_LIMPO · pesos de classe</p>
       </div>
     </div>
   </section>
 
-  <!-- 9 INTERPRETACAO -->
-  <section class="slide" data-eyebrow="Interpretacao">
+  <!-- 9 INTERPRETAÇÃO -->
+  <section class="slide" data-eyebrow="Interpretação">
     <div>
       <h2>Por que o baseline <em>supera</em><br>deep learning?</h2>
       <ul class="clean" style="margin-top:20px;max-width:82ch">
-        <li><b>Corpus pequeno + desbalanceamento extremo</b> — apenas ~240 exemplos de Ressalva e ~93 de Regular. Insuficiente para fine-tuning robusto de 110M parametros.</li>
-        <li><b>Sinal predominantemente lexical</b> — presenca/ausencia de termos especificos e mais discriminativa que representacoes semanticas densas neste corpus.</li>
-        <li><b>TF-IDF ve o documento inteiro</b> — sem truncagem a 512 tokens. BERT perde informacao em votos longos (mediana ~1.800 tokens).</li>
+        <li><b>Corpus pequeno + desbalanceamento extremo</b> — apenas ~240 exemplos de Ressalva e ~93 de Regular. Insuficiente para fine-tuning robusto de 110M parâmetros.</li>
+        <li><b>Sinal predominantemente lexical</b> — presença/ausência de termos específicos é mais discriminativa que representações semânticas densas neste corpus.</li>
+        <li><b>TF-IDF vê o documento inteiro</b> — sem truncagem a 512 tokens. BERT perde informação em votos longos (mediana ~1.800 tokens).</li>
       </ul>
       <div class="mult" style="margin-top:30px">
         <div class="m"><div class="x">1.800</div><div class="d">mediana de tokens<br><b>por voto</b></div></div>
@@ -337,15 +337,15 @@
     <div class="row two">
       <div>
         <span class="kicker">Antes vs depois</span>
-        <h2>O impacto da <em>correcao</em></h2>
-        <p class="lead">A queda F1 ~0.99 para 0.491 demonstra que os resultados anteriores eram <b>inteiramente inflados</b> por leakage. O F1=0.491 e o resultado honesto.</p>
+        <h2>O impacto da <em>correção</em></h2>
+        <p class="lead">A queda F1 ~0.99 para 0.491 demonstra que os resultados anteriores eram <b>inteiramente inflados</b> por leakage. O F1=0.491 é o resultado honesto.</p>
       </div>
       <div>
         <div style="font-family:var(--mono);font-size:13px">
           <div style="padding:18px;border:1px solid var(--terra);margin-bottom:14px">
             <div style="color:var(--terra);font-size:11px;letter-spacing:.15em;margin-bottom:6px">ANTES — COM VAZAMENTO</div>
             <div style="font-family:var(--disp);font-size:42px;color:var(--terra)">~0.99</div>
-            <div style="color:var(--sub);margin-top:4px">feature: SUMARIO (contaminado)</div>
+            <div style="color:var(--sub);margin-top:4px">feature: SUMÁRIO (contaminado)</div>
           </div>
           <div style="padding:18px;border:1px solid var(--gold)">
             <div style="color:var(--gold);font-size:11px;letter-spacing:.15em;margin-bottom:6px">DEPOIS — SEM VAZAMENTO</div>
@@ -368,7 +368,7 @@
       <div>
         <span class="kicker">Melhor modelo — TF-IDF</span>
         <h2>F1 por <em>classe</em></h2>
-        <p class="lead">A classe majoritaria e bem classificada. As raras sao o desafio real — e onde a ponderacao de classes faz a diferenca.</p>
+        <p class="lead">A classe majoritária é bem classificada. As raras são o desafio real — e onde a ponderação de classes faz a diferença.</p>
       </div>
       <div>
         <div class="bars" style="gap:24px">
@@ -377,23 +377,23 @@
           <div class="bar"><span class="lab">Regular<br><small style="font-size:10px">n=93</small></span><span class="track" style="height:14px"><span class="fill f5" style="width:11.6%"></span></span><span class="val" style="font-size:18px">0.116</span></div>
         </div>
         <div class="callout" style="margin-top:26px">
-          <span class="big">O gargalo e dado</span>
+          <span class="big">O gargalo é dado</span>
           <p>Com apenas <b>93 exemplos</b> de Regular, nenhum modelo — linear ou profundo — consegue aprender essa classe de forma robusta.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 12 CONCLUSAO -->
-  <section class="slide" data-eyebrow="Conclusao">
+  <!-- 12 CONCLUSÃO -->
+  <section class="slide" data-eyebrow="Conclusão">
     <div>
-      <span class="tag">Conclusao</span>
-      <h2 style="font-size:clamp(27px,4.4vw,50px)">Resultado <em>honesto</em>,<br>nao resultado inflado</h2>
+      <span class="tag">Conclusão</span>
+      <h2 style="font-size:clamp(27px,4.4vw,50px)">Resultado <em>honesto</em>,<br>não resultado inflado</h2>
       <ul class="clean" style="margin-top:24px;max-width:82ch">
-        <li><b>Correcao de vazamento e inegociavel</b> — F1 ~0.99 com SUMARIO era ilusao. O pipeline audita automaticamente antes de treinar.</li>
-        <li><b>Baseline classico supera deep learning</b> — TF-IDF 0.491 contra LegalBert 0.335. Corpus pequeno + desbalanceamento extremo favorece modelo linear.</li>
-        <li><b>Ponderacao de classes e requisito</b> — sem ela, F1 cai de 0.491 para 0.317 (classes raras colapsam a zero).</li>
-        <li><b>O gargalo e a escassez de dados nas classes raras</b> — nao a capacidade da arquitetura.</li>
+        <li><b>Correção de vazamento é inegociável</b> — F1 ~0.99 com SUMÁRIO era ilusão. O pipeline audita automaticamente antes de treinar.</li>
+        <li><b>Baseline clássico supera deep learning</b> — TF-IDF 0.491 contra LegalBert 0.335. Corpus pequeno + desbalanceamento extremo favorece modelo linear.</li>
+        <li><b>Ponderação de classes é requisito</b> — sem ela, F1 cai de 0.491 para 0.317 (classes raras colapsam a zero).</li>
+        <li><b>O gargalo é a escassez de dados nas classes raras</b> — não a capacidade da arquitetura.</li>
       </ul>
       <p class="chartnote" style="margin-top:26px">Pipeline completo: github.com/bsousa7/deep-acordao-tcu2 · Dados: Portal de Dados Abertos do TCU</p>
     </div>
@@ -402,7 +402,7 @@
 </div>
 
 <div class="dots" id="dots"></div>
-<div class="nav"><button id="prev" aria-label="Slide anterior">&#8249;</button><button id="next" aria-label="Proximo slide">&#8250;</button></div>
+<div class="nav"><button id="prev" aria-label="Slide anterior">&#8249;</button><button id="next" aria-label="Próximo slide">&#8250;</button></div>
 <div class="hint"><b>&larr; &rarr;</b> navegar · <b>F</b> tela cheia</div>
 
 <script>
