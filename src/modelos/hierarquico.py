@@ -201,11 +201,13 @@ class HierarchicalBert(nn.Module):
         self.classifier = nn.Linear(hidden_size, num_labels)
         self.dropout = nn.Dropout(0.1)
 
-    def forward(self, sent_input_ids, sent_attention_mask, sent_counts):
+    def forward(self, sent_input_ids, sent_attention_mask, sent_counts,
+                chunk_size: int = 16):
         """
         sent_input_ids: (batch, max_sents, max_sent_len)
         sent_attention_mask: (batch, max_sents, max_sent_len)
         sent_counts: (batch,) — número real de sentenças por documento
+        chunk_size: número de sentenças processadas por vez pelo encoder
         """
         B, S, L = sent_input_ids.shape
         device = sent_input_ids.device
@@ -213,8 +215,15 @@ class HierarchicalBert(nn.Module):
         flat_ids = sent_input_ids.view(B * S, L)
         flat_mask = sent_attention_mask.view(B * S, L)
 
-        out = self.encoder(input_ids=flat_ids, attention_mask=flat_mask)
-        cls_emb = out.last_hidden_state[:, 0, :]  # (B*S, H)
+        total = B * S
+        cls_parts = []
+        for i in range(0, total, chunk_size):
+            chunk_ids = flat_ids[i:i + chunk_size]
+            chunk_mask = flat_mask[i:i + chunk_size]
+            out = self.encoder(input_ids=chunk_ids, attention_mask=chunk_mask)
+            cls_parts.append(out.last_hidden_state[:, 0, :])
+
+        cls_emb = torch.cat(cls_parts, dim=0)  # (B*S, H)
         cls_emb = cls_emb.view(B, S, -1)  # (B, S, H)
 
         scores = self.sent_attn_w(cls_emb).squeeze(-1)  # (B, S)
@@ -295,10 +304,10 @@ def kfold_hierarquico(
     df: pd.DataFrame,
     campo: str = "VOTO_LIMPO",
     n_splits: int = 5,
-    max_sents: int = 48,
+    max_sents: int = 32,
     max_sent_len: int = 128,
     epochs: int = 5,
-    batch_size: int = 4,
+    batch_size: int = 2,
     learning_rate: float = 2e-5,
     freeze_encoder_epochs: int = 1,
 ) -> dict:
