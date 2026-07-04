@@ -166,11 +166,17 @@ def kfold(
     focal_gamma: float = 2.0,
     usar_lora: bool = True,
     output_base: str | Path = "resultados/modelos",
+    epochs: int | None = None,
+    max_length: int = 512,
+    batch_size: int | None = None,
 ) -> dict:
     """
     LoRA K-Fold — VOTO_LIMPO, com pesos de classe por fold.
 
     loss: 'weighted_ce' (padrão) ou 'focal'.
+    epochs/batch_size: sobrescrevem TRAIN_PARAMS quando informados — usado para
+    reduzir o custo em ambientes sem GPU (validação de fluxo, não resultado final).
+    max_length: tamanho da sequência tokenizada (default 512, D-01 head+tail).
     """
     import torch
     from transformers import EarlyStoppingCallback, TrainingArguments
@@ -204,10 +210,16 @@ def kfold(
         yva = yid[va].tolist()
 
         weights = pesos_tensor(np.asarray(ytr))
-        ds_tr = _criar_dataset(textos_arr[tr].tolist(), ytr, tokenizer)
-        ds_va = _criar_dataset(textos_arr[va].tolist(), yva, tokenizer)
+        ds_tr = _criar_dataset(textos_arr[tr].tolist(), ytr, tokenizer, max_length=max_length)
+        ds_va = _criar_dataset(textos_arr[va].tolist(), yva, tokenizer, max_length=max_length)
 
-        args = TrainingArguments(**{**TRAIN_PARAMS, "output_dir": str(out)})
+        params = {**TRAIN_PARAMS, "output_dir": str(out)}
+        if epochs is not None:
+            params["num_train_epochs"] = epochs
+        if batch_size is not None:
+            params["per_device_train_batch_size"] = batch_size
+            params["per_device_eval_batch_size"] = max(batch_size, 16)
+        args = TrainingArguments(**params)
 
         if loss == "focal":
             alpha = alpha_por_frequencia_inversa(np.asarray(ytr), len(NOMES_CLASSES))

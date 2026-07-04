@@ -63,7 +63,8 @@ deep-acordao-tcu2/
 │   ├── 00_visao_geral.ipynb
 │   ├── 01_pipeline_limpo.ipynb
 │   ├── 02_baseline_ponderado.ipynb
-│   └── 03_textcnn_ponderado.ipynb
+│   ├── 03_textcnn_ponderado.ipynb
+│   └── 04_legalbert_ponderado.ipynb      (opcional, requer GPU)
 ├── tests/test_pipeline.py               ← 13 testes unitários (sem GPU/CSV real)
 ├── docs/{referencias,decisoes}.md
 └── resultados/                          ← vazio até a execução dos notebooks
