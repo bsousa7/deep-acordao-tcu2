@@ -323,6 +323,7 @@
         <li><b>Corpus pequeno + desbalanceamento extremo</b> — apenas ~240 exemplos de Ressalva e ~93 de Regular. Insuficiente para fine-tuning robusto de 110M parâmetros.</li>
         <li><b>Sinal predominantemente lexical</b> — presença/ausência de termos específicos é mais discriminativa que representações semânticas densas neste corpus.</li>
         <li><b>TF-IDF vê o documento inteiro</b> — sem truncagem a 512 tokens. BERT perde informação em votos longos (mediana ~1.800 tokens).</li>
+        <li><b>Hierárquico colapsou (F1=0.317)</b> — aumentar cobertura do documento não resolve quando o fator limitante é volume de dados nas classes minoritárias.</li>
       </ul>
       <div class="mult" style="margin-top:30px">
         <div class="m"><div class="x">1.800</div><div class="d">mediana de tokens<br><b>por voto</b></div></div>
@@ -369,6 +370,10 @@
         <span class="kicker">Melhor modelo — TF-IDF</span>
         <h2>F1 por <em>classe</em></h2>
         <p class="lead">A classe majoritária é bem classificada. As raras são o desafio real — e onde a ponderação de classes faz a diferença.</p>
+        <div class="callout" style="margin-top:20px">
+          <span class="big">Hold-out 2024</span>
+          <p>F1-macro = <b>0.412</b> no teste temporal. O modelo generaliza para anos não vistos sem degradação catastrófica.</p>
+        </div>
       </div>
       <div>
         <div class="bars" style="gap:24px">
@@ -391,9 +396,9 @@
       <h2 style="font-size:clamp(27px,4.4vw,50px)">Resultado <em>honesto</em>,<br>não resultado inflado</h2>
       <ul class="clean" style="margin-top:24px;max-width:82ch">
         <li><b>Correção de vazamento é inegociável</b> — F1 ~0.99 com SUMÁRIO era ilusão. O pipeline audita automaticamente antes de treinar.</li>
-        <li><b>Baseline clássico supera deep learning</b> — TF-IDF 0.491 contra LegalBert 0.335. Corpus pequeno + desbalanceamento extremo favorece modelo linear.</li>
+        <li><b>Baseline clássico supera deep learning</b> — TF-IDF 0.491 vs TextCNN 0.367 vs LegalBert 0.335 vs Hierárquico 0.317. A hierarquia linear > CNN > transformer é consistente com cenários de poucos dados.</li>
         <li><b>Ponderação de classes é requisito</b> — sem ela, F1 cai de 0.491 para 0.317 (classes raras colapsam a zero).</li>
-        <li><b>O gargalo é a escassez de dados nas classes raras</b> — não a capacidade da arquitetura.</li>
+        <li><b>O gargalo é dado, não arquitetura</b> — 93 exemplos de Regular e 241 de Ressalva limitam qualquer modelo. Hold-out temporal (F1=0.412) confirma generalização sem degradação.</li>
       </ul>
       <p class="chartnote" style="margin-top:26px">Pipeline completo: github.com/bsousa7/deep-acordao-tcu2 · Dados: Portal de Dados Abertos do TCU</p>
     </div>

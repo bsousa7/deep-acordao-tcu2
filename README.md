@@ -103,6 +103,8 @@ Cinco arquiteturas avaliadas sobre `VOTO_LIMPO`, todas com pesos de classe:
 
 **Hold-out temporal (treino ≤ 2022, teste = 2024):** F1-macro = 0.412 (baseline).
 
+![Comparativo de F1-macro entre os cinco modelos](resultados/figuras/comparativo_final.png)
+
 ### F1 por classe (baseline — melhor modelo)
 
 | Classe | F1 | Suporte |
@@ -110,6 +112,8 @@ Cinco arquiteturas avaliadas sobre `VOTO_LIMPO`, todas com pesos de classe:
 | Irregular | 0.958 | 3.310 |
 | Regular com Ressalva | 0.399 | 241 |
 | Regular | 0.116 | 93 |
+
+![Matriz de confusão — baseline hold-out temporal (2024)](resultados/figuras/cm_baseline_holdout.png)
 
 ### Interpretação
 
@@ -123,11 +127,26 @@ Três fatores explicam:
 3. **TF-IDF vê o documento inteiro** — sem truncagem. BERT limitado a 512 tokens
    perde informação em votos longos (mediana ~1.800 tokens).
 
+![Distribuição de comprimentos dos votos em tokens BERT](resultados/figuras/distribuicao_tokens.png)
+
 A estratégia Head+Tail (início + fim do voto) deu ganho marginal (+0.006) sobre
 truncagem simples. O modelo hierárquico (que processa o voto inteiro via 32
 sentenças) colapsou para a classe majoritária (F1=0.317 ≈ piso aleatório),
 evidenciando que o gargalo principal não é perda de informação posicional
 nem cobertura do documento, mas insuficiência de exemplos para fine-tuning.
+
+![Matriz de confusão — TextCNN 5-fold](resultados/figuras/textcnn_matriz_confusao.png)
+
+**Conclusões do comparativo:**
+
+- A hierarquia de desempenho (linear > CNN > transformer) é consistente com
+  a literatura em cenários de poucos dados + desbalanceamento severo
+  (King & Zeng, 2001; Buda et al., 2018).
+- O colapso do modelo hierárquico (variância zero entre folds) confirma que
+  aumentar a cobertura do documento não resolve quando o fator limitante é
+  volume de dados nas classes minoritárias.
+- O hold-out temporal (F1=0.412) valida que o modelo generaliza para anos
+  não vistos, sem degradação catastrófica.
 
 ### Impacto da correção de vazamento
 
