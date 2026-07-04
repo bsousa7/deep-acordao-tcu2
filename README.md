@@ -84,13 +84,38 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python -m pytest tests/ -v          # 13 testes passam sem CSV/GPU
 
-# Em Colab (recomendado para o LegalBert-pt): abra notebooks/01_pipeline_limpo.ipynb
-# e execute na ordem 01 → 02 → 03. Cada notebook regenera seu resultados/metricas_*.json.
+# Em Colab (recomendado para GPU): abra notebooks/ e execute na ordem 01 → 02 → 03 → 04 → 05.
+# Cada notebook regenera seu resultados/metricas_*.json. O 05 consolida o comparativo final.
 ```
 
-Os resultados finais **serão gerados** pela execução dos notebooks — este README
-não os antecipa. Comprometimento com honestidade metodológica: o número que sai é o
-número que o código produziu, medido sobre feature auditada como livre de vazamento.
+## Resultados (corpus: 3.644 acórdãos, 2016–2024, Saúde/Educação)
+
+Distribuição de classes: **Irregular 91%** | Regular com Ressalva 6,6% | Regular 2,4%.
+
+| # | Modelo (notebook) | F1-macro | IC 95% | Acurácia |
+|---|---|---|---|---|
+| 1 | TF-IDF + LogReg `balanced` (02) | **0.491** | [0.404, 0.579] | 0.913 |
+| 2 | TextCNN ponderado (03) | 0.367 | — | 0.885 |
+| 3 | LegalBert Head+Tail + LoRA (05) | 0.335 | [0.311, 0.359] | 0.878 |
+| 4 | LegalBert Truncado + LoRA (04) | 0.329 | [0.312, 0.346] | 0.857 |
+
+> Todos os modelos usam **exclusivamente `VOTO_LIMPO`** (sem leakage do SUMARIO),
+> com **pesos de classe** obrigatórios. Avaliação por K-Fold estratificado (5×).
+
+### Interpretação
+
+- O baseline linear (TF-IDF + LogReg) supera modelos profundos neste corpus — resultado
+  esperado em cenários de poucos dados + desbalanceamento extremo.
+- O sinal discriminativo é predominantemente **lexical** (presença/ausência de termos),
+  não semântico — favorece bag-of-words sobre o documento inteiro.
+- A estratégia Head+Tail (+0.005 sobre truncagem simples) indica que o gargalo não é
+  truncagem, mas sim insuficiência de exemplos para fine-tuning (110M parâmetros).
+- Eliminar o vazamento (SUMARIO → VOTO_LIMPO) torna a tarefa genuinamente difícil:
+  o SUMARIO sozinho dava F1≈0.99 na v1 — evidenciando que os resultados anteriores
+  eram inflados por leakage.
+
+Comprometimento com honestidade metodológica: o número que sai é o número que o
+código produziu, medido sobre feature auditada como livre de vazamento.
 
 ---
 
