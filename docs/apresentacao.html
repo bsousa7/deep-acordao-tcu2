@@ -235,7 +235,61 @@
     </div>
   </section>
 
-  <!-- 6 MODELOS -->
+  <!-- 6 PIPELINE -->
+  <section class="slide" data-eyebrow="Pipeline">
+    <div class="row two">
+      <div>
+        <span class="kicker">Visão geral</span>
+        <h2>Pipeline <em>end-to-end</em></h2>
+        <p class="lead">Seis etapas sequenciais — da aquisição dos dados brutos ao comparativo final. As etapas de anti-vazamento (em destaque) são a contribuição central do projeto.</p>
+        <div style="margin-top:22px;font-family:var(--mono);font-size:11px;color:var(--mut);display:flex;align-items:center;gap:10px">
+          <span style="display:inline-block;width:14px;height:14px;background:var(--terra);border-radius:3px"></span>
+          <span>etapa anti-vazamento — contribuição central</span>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0;font-family:var(--mono);font-size:12px">
+          <!-- Etapa 1 -->
+          <div style="background:#4a4540;border-radius:8px;padding:16px 28px;text-align:center;width:100%;max-width:340px">
+            <div style="color:var(--cream);font-weight:700;font-size:14px;font-family:var(--disp)">Aquisição e filtro temático</div>
+            <div style="color:var(--sub);margin-top:4px;font-size:11px">3.644 acórdãos · saúde e educação</div>
+          </div>
+          <div style="color:var(--sub);font-size:16px;line-height:1.6">↓</div>
+          <!-- Etapa 2 -->
+          <div style="background:#4a4540;border-radius:8px;padding:16px 28px;text-align:center;width:100%;max-width:340px">
+            <div style="color:var(--cream);font-weight:700;font-size:14px;font-family:var(--disp)">Rotulagem</div>
+            <div style="color:var(--sub);margin-top:4px;font-size:11px">irregular · ressalva · regular</div>
+          </div>
+          <div style="color:var(--sub);font-size:16px;line-height:1.6">↓</div>
+          <!-- Etapa 3 — anti-vazamento -->
+          <div style="background:var(--terra);border-radius:8px;padding:16px 28px;text-align:center;width:100%;max-width:340px">
+            <div style="color:var(--cream);font-weight:700;font-size:14px;font-family:var(--disp)">Construção da feature</div>
+            <div style="color:#e8c8b8;margin-top:4px;font-size:11px">voto sem o veredito → VOTO_LIMPO</div>
+          </div>
+          <div style="color:var(--sub);font-size:16px;line-height:1.6">↓</div>
+          <!-- Etapa 4 — anti-vazamento -->
+          <div style="background:var(--terra);border-radius:8px;padding:16px 28px;text-align:center;width:100%;max-width:340px">
+            <div style="color:var(--cream);font-weight:700;font-size:14px;font-family:var(--disp)">Gate anti-vazamento</div>
+            <div style="color:#e8c8b8;margin-top:4px;font-size:11px">contaminação 0% ou aborta</div>
+          </div>
+          <div style="color:var(--sub);font-size:16px;line-height:1.6">↓</div>
+          <!-- Etapa 5 -->
+          <div style="background:#4a4540;border-radius:8px;padding:16px 28px;text-align:center;width:100%;max-width:340px">
+            <div style="color:var(--cream);font-weight:700;font-size:14px;font-family:var(--disp)">Split e modelagem</div>
+            <div style="color:var(--sub);margin-top:4px;font-size:11px">temporal · 5-fold · 5 modelos</div>
+          </div>
+          <div style="color:var(--sub);font-size:16px;line-height:1.6">↓</div>
+          <!-- Etapa 6 -->
+          <div style="background:#1a6b5a;border-radius:8px;padding:16px 28px;text-align:center;width:100%;max-width:340px">
+            <div style="color:var(--cream);font-weight:700;font-size:14px;font-family:var(--disp)">Avaliação</div>
+            <div style="color:#a8d8cc;margin-top:4px;font-size:11px">F1-macro · TF-IDF vence (0,49)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 MODELOS -->
   <section class="slide" data-eyebrow="Modelos">
     <div>
       <span class="kicker">Comparativo de arquiteturas</span>
