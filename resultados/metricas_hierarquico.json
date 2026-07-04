@@ -26,5 +26,31 @@
       0.3499200134714153,
       0.31697931697931697
     ]
+  },
+  "hierarquico": {
+    "estrategia": "encoder por sentença + attention",
+    "hiperparametros": {
+      "max_sents": 32,
+      "max_sent_len": 128,
+      "epochs": 5,
+      "batch_size": 2,
+      "n_splits": 5,
+      "freeze_encoder_epochs": 1
+    },
+    "mean_f1": 0.3173,
+    "std_f1": 0.0001,
+    "ci_95": [
+      0.3171966405026047,
+      0.3174501381205069
+    ],
+    "mean_acc": 0.9083,
+    "fold_scores": [
+      0.3173,
+      0.3173,
+      0.3173,
+      0.3173,
+      0.3175
+    ],
+    "nota": "Modelo colapsou para classe majoritária (variância zero entre folds)"
   }
 }
