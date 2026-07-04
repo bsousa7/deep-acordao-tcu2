@@ -214,6 +214,14 @@ def kfold(
         ds_va = _criar_dataset(textos_arr[va].tolist(), yva, tokenizer, max_length=max_length)
 
         params = {**TRAIN_PARAMS, "output_dir": str(out)}
+        if usar_lora:
+            # PEFT salva apenas o adapter (adapter_model.safetensors) em cada
+            # checkpoint, não o modelo completo — load_best_model_at_end=True
+            # tenta recarregar um pytorch_model.bin/model.safetensors que não
+            # existe nesse caso, e falha com FileNotFoundError ao final do
+            # treino. EarlyStoppingCallback continua funcionando normalmente
+            # (não depende de load_best_model_at_end para decidir quando parar).
+            params["load_best_model_at_end"] = False
         if epochs is not None:
             params["num_train_epochs"] = epochs
         if batch_size is not None:
