@@ -5,6 +5,7 @@ rótulo. A construção das features limpas é responsabilidade do módulo
 """
 
 import logging
+import re
 from pathlib import Path
 
 import pandas as pd
@@ -17,15 +18,60 @@ logger = logging.getLogger(__name__)
 COLUNAS_USADAS = ["NUMACORDAO", "SITUACAO", "SUMARIO", "VOTO", "ACORDAO", "ASSUNTO"]
 
 TERMOS_TEMATICOS = [
+    # --- Saúde ---
     "saúde",
     "sus",
-    "fnde",
-    "merenda",
-    "educação",
+    "hospital",
+    "hospitalar",
+    "unidade básica de saúde",
+    "ubs",
+    "upa",
+    "samu",
+    "vigilância sanitária",
+    "anvisa",
+    "ans",
+    "atenção básica",
+    "assistência farmacêutica",
+    "farmácia básica",
+    "medicamento",
+    "posto de saúde",
+    "ambulatorial",
     "ministério da saúde",
     "secretaria de saúde",
+    "secretaria municipal de saúde",
+    "secretaria estadual de saúde",
+    # --- Educação ---
+    "educação",
+    "fnde",
+    "merenda",
+    "escola",
+    "escolar",
+    "ensino",
+    "universidade",
+    "universitário",
+    "creche",
+    "fundeb",
+    "pnae",
+    "pnate",
+    "transporte escolar",
+    "mec",
+    "capes",
+    "alfabetização",
+    "livro didático",
+    "instituto federal",
+    "ministério da educação",
     "secretaria de educação",
+    "secretaria municipal de educação",
+    "secretaria estadual de educação",
 ]
+
+# Word-boundary (\b) evita falso-positivo de abreviações curtas dentro de outras
+# palavras (ex.: "ubs" não deve casar com "subsídio"; "mec" não deve casar com
+# "mecanismo"; "upa" não deve casar com "ocupação").
+_RE_TERMOS_TEMATICOS = re.compile(
+    r"\b(?:" + "|".join(re.escape(t) for t in TERMOS_TEMATICOS) + r")\b",
+    flags=re.IGNORECASE,
+)
 
 DATA_RAW = Path(__file__).resolve().parents[2] / "data" / "raw"
 DATA_INTERIM = Path(__file__).resolve().parents[2] / "data" / "interim"
@@ -41,11 +87,10 @@ def inspecionar_colunas(caminho_csv: str | Path) -> pd.DataFrame:
     return info
 
 
-def _contem_termos(texto: str | None, termos: list[str] = TERMOS_TEMATICOS) -> bool:
+def _contem_termos(texto: str | None) -> bool:
     if not isinstance(texto, str):
         return False
-    texto_lower = texto.lower()
-    return any(t in texto_lower for t in termos)
+    return bool(_RE_TERMOS_TEMATICOS.search(texto))
 
 
 def filtrar_por_tema(df: pd.DataFrame) -> pd.DataFrame:
