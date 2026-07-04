@@ -83,7 +83,7 @@ Cinco arquiteturas avaliadas sobre `VOTO_LIMPO`, todas com pesos de classe:
 | **TextCNN** | 03 | Embeddings + convoluções 1D (Kim, 2014) | 300 palavras |
 | **LegalBert-pt + LoRA** | 04 | Fine-tuning BERT jurídico com adapters LoRA | 512 tokens (truncagem à direita) |
 | **LegalBert Head+Tail** | 05 | BERT com início + fim do documento | 256 + 254 tokens |
-| **Hierárquico** | 05 | Encoder por sentença + attention sobre sentenças | 48 sentenças × 128 tokens |
+| **Hierárquico** | 05 | Encoder por sentença + attention sobre sentenças | 32 sentenças × 128 tokens |
 
 ---
 
@@ -99,6 +99,7 @@ Cinco arquiteturas avaliadas sobre `VOTO_LIMPO`, todas com pesos de classe:
 | 2 | TextCNN ponderado | 0.367 | — | 0.885 |
 | 3 | LegalBert Head+Tail + LoRA | 0.335 | [0.311, 0.359] | 0.878 |
 | 4 | LegalBert Truncado + LoRA | 0.329 | [0.312, 0.346] | 0.857 |
+| 5 | Hierárquico (BERT + Attention) | 0.317 | [0.317, 0.318] | 0.908 |
 
 **Hold-out temporal (treino ≤ 2022, teste = 2024):** F1-macro = 0.412 (baseline).
 
@@ -123,8 +124,10 @@ Três fatores explicam:
    perde informação em votos longos (mediana ~1.800 tokens).
 
 A estratégia Head+Tail (início + fim do voto) deu ganho marginal (+0.006) sobre
-truncagem simples — evidenciando que o gargalo principal não é perda de informação
-posicional, mas insuficiência de exemplos para fine-tuning.
+truncagem simples. O modelo hierárquico (que processa o voto inteiro via 32
+sentenças) colapsou para a classe majoritária (F1=0.317 ≈ piso aleatório),
+evidenciando que o gargalo principal não é perda de informação posicional
+nem cobertura do documento, mas insuficiência de exemplos para fine-tuning.
 
 ### Impacto da correção de vazamento
 
