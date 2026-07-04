@@ -252,14 +252,33 @@ Alternativa para desbalanceamento severo: `Focal Loss` (Lin et al., 2017).
 
 ## Referências
 
-Ver `docs/referencias.md` — organizadas por domínio:
+### Jurimetria Preditiva e Controle Externo
 
-- **Domínio A:** Jurimetria preditiva e controle externo
-  (Aletras et al., 2016; Medvedeva et al., 2020; Lage-Freitas et al., 2022; Tveita & Hustad, 2025).
-- **Domínio B:** Modelos de linguagem e NLP jurídico
-  (Vaswani et al., 2017; Devlin et al., 2019; Kim, 2014; Souza et al., 2020; Domingues, 2022).
-- **Domínio C:** Adaptação, desbalanceamento e otimização
-  (Hu et al., 2022; Sun et al., 2019; Lin et al., 2017; King & Zeng, 2001).
+- ALETRAS, N. et al. **Predicting judicial decisions of the European Court of Human Rights: A Natural Language Processing perspective.** *PeerJ Computer Science*, v. 2, e93, 2016. [doi:10.7717/peerj-cs.93](https://doi.org/10.7717/peerj-cs.93)
+- MEDVEDEVA, M.; VOLS, M.; WIELING, M. **Using machine learning to predict decisions of the European Court of Human Rights.** *Artificial Intelligence and Law*, v. 28, n. 2, p. 237–266, 2020. [doi:10.1007/s10506-019-09255-y](https://doi.org/10.1007/s10506-019-09255-y)
+- LAGE-FREITAS, A. et al. **Predicting Brazilian court decisions.** *PeerJ Computer Science*, v. 8, e904, 2022. [doi:10.7717/peerj-cs.904](https://doi.org/10.7717/peerj-cs.904)
+- CHALKIDIS, I. et al. **Neural Legal Judgment Prediction in English.** In: ACL, 2019. [doi:10.18653/v1/P19-1424](https://doi.org/10.18653/v1/P19-1424)
+- TVEITA, S.; HUSTAD, E. **Benefits and challenges of AI in the public sector.** In: HICSS, 2025.
+
+### Modelos de Linguagem e NLP Jurídico
+
+- VASWANI, A. et al. **Attention Is All You Need.** In: NeurIPS, 2017. [doi:10.48550/arXiv.1706.03762](https://doi.org/10.48550/arXiv.1706.03762)
+- DEVLIN, J. et al. **BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.** In: NAACL, 2019. [doi:10.18653/v1/N19-1423](https://doi.org/10.18653/v1/N19-1423)
+- KIM, Y. **Convolutional Neural Networks for Sentence Classification.** In: EMNLP, 2014. [doi:10.3115/v1/D14-1181](https://doi.org/10.3115/v1/D14-1181)
+- YANG, Z. et al. **Hierarchical Attention Networks for Document Classification.** In: NAACL, 2016. [doi:10.18653/v1/N16-1174](https://doi.org/10.18653/v1/N16-1174)
+- SOUZA, F.; NOGUEIRA, R.; LOTUFO, R. **BERTimbau: Pretrained BERT Models for Brazilian Portuguese.** In: BRACIS, 2020. [doi:10.1007/978-3-030-61377-8_28](https://doi.org/10.1007/978-3-030-61377-8_28)
+- DOMINGUES, L. **legal-bert-base-cased-ptbr: BERT model pre-trained on Brazilian legal corpus.** HuggingFace Hub, 2022. [Modelo](https://huggingface.co/dominguesm/legal-bert-base-cased-ptbr)
+- WOLF, T. et al. **Transformers: state-of-the-art natural language processing.** In: EMNLP Demos, 2020. [doi:10.18653/v1/2020.emnlp-demos.6](https://doi.org/10.18653/v1/2020.emnlp-demos.6)
+
+### Adaptação, Desbalanceamento e Otimização
+
+- HU, E. J. et al. **LoRA: Low-Rank Adaptation of Large Language Models.** In: ICLR, 2022. [doi:10.48550/arXiv.2106.09685](https://doi.org/10.48550/arXiv.2106.09685)
+- SUN, C. et al. **How to Fine-Tune BERT for Text Classification?** In: CCL, 2019. [doi:10.1007/978-3-030-32381-3_16](https://doi.org/10.1007/978-3-030-32381-3_16)
+- LIN, T.-Y. et al. **Focal Loss for Dense Object Detection.** In: ICCV, 2017. [doi:10.1109/ICCV.2017.324](https://doi.org/10.1109/ICCV.2017.324)
+- KING, G.; ZENG, L. **Logistic Regression in Rare Events Data.** *Political Analysis*, v. 9, n. 2, p. 137–163, 2001. [doi:10.1093/oxfordjournals.pan.a004868](https://doi.org/10.1093/oxfordjournals.pan.a004868)
+- BUDA, M.; MAKI, A.; MAZUROWSKI, M. A. **A systematic study of the class imbalance problem in convolutional neural networks.** *Neural Networks*, v. 106, p. 249–259, 2018. [doi:10.1016/j.neunet.2018.07.011](https://doi.org/10.1016/j.neunet.2018.07.011)
+- PEDREGOSA, F. et al. **Scikit-learn: machine learning in Python.** *JMLR*, v. 12, p. 2825–2830, 2011. [Link](https://jmlr.org/papers/v12/pedregosa11a.html)
+- RIBEIRO, M. T.; SINGH, S.; GUESTRIN, C. **"Why should I trust you?": explaining the predictions of any classifier.** In: KDD, 2016. [doi:10.1145/2939672.2939778](https://doi.org/10.1145/2939672.2939778)
 
 ---
 
