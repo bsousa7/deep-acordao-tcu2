@@ -1,0 +1,115 @@
+{
+  "escopo": {
+    "anos": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "anos_disponiveis": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "ano_val": 2023,
+    "ano_teste": 2024,
+    "tipo_split": "temporal"
+  },
+  "corpus": {
+    "total_apos_filtro_tematico_e_tamanho": 3644,
+    "distribuicao_global": {
+      "Irregular": 3310,
+      "Regular com Ressalva": 241,
+      "Regular": 93
+    },
+    "distribuicao_por_ano": {
+      "Irregular": {
+        "2016": 255,
+        "2017": 411,
+        "2018": 363,
+        "2019": 326,
+        "2020": 440,
+        "2021": 457,
+        "2022": 415,
+        "2023": 300,
+        "2024": 343
+      },
+      "Regular": {
+        "2016": 9,
+        "2017": 8,
+        "2018": 8,
+        "2019": 4,
+        "2020": 9,
+        "2021": 21,
+        "2022": 14,
+        "2023": 8,
+        "2024": 12
+      },
+      "Regular com Ressalva": {
+        "2016": 19,
+        "2017": 16,
+        "2018": 17,
+        "2019": 27,
+        "2020": 28,
+        "2021": 36,
+        "2022": 26,
+        "2023": 34,
+        "2024": 38
+      }
+    },
+    "dispositivo_localizado_frac": 0.2601536772777168
+  },
+  "auditoria_vazamento": {
+    "SUMARIO_referencia": {
+      "campo": "SUMARIO",
+      "total": 3644,
+      "n_vazados": 3574,
+      "fracao_vazado": 0.9808,
+      "gate_passou": false
+    },
+    "VOTO_LIMPO_feature": {
+      "campo": "VOTO_LIMPO",
+      "total": 3644,
+      "n_vazados": 0,
+      "fracao_vazado": 0.0,
+      "gate_passou": true
+    }
+  },
+  "splits": {
+    "treino": {
+      "n": 2909,
+      "dist": {
+        "Irregular": 2667,
+        "Regular com Ressalva": 169,
+        "Regular": 73
+      }
+    },
+    "val": {
+      "n": 342,
+      "dist": {
+        "Irregular": 300,
+        "Regular com Ressalva": 34,
+        "Regular": 8
+      }
+    },
+    "teste": {
+      "n": 393,
+      "dist": {
+        "Irregular": 343,
+        "Regular com Ressalva": 38,
+        "Regular": 12
+      }
+    }
+  }
+}

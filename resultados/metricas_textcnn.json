@@ -1,0 +1,36 @@
+{
+  "modelo": "TextCNN (Kim 2014)",
+  "feature": "VOTO_LIMPO",
+  "weighting": "CrossEntropyLoss(weight=pesos_tensor(y_tr)) por fold",
+  "kfold_5x": {
+    "f1_macro": 0.36737391714516376,
+    "accuracy": 0.8850164654226125,
+    "per_class_f1": {
+      "Irregular": 0.9396032329169728,
+      "Regular com Ressalva": 0.144,
+      "Regular": 0.018518518518518517
+    },
+    "confusion_matrix": [
+      [
+        3197,
+        101,
+        12
+      ],
+      [
+        212,
+        27,
+        2
+      ],
+      [
+        86,
+        6,
+        1
+      ]
+    ]
+  },
+  "hiperparametros": {
+    "vocab_size": 20002,
+    "max_len": 300,
+    "epochs": 8
+  }
+}

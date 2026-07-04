@@ -1,0 +1,70 @@
+{
+  "representacao": "TF-IDF 50k bigramas + LogReg",
+  "feature": "VOTO_LIMPO (sem SUMARIO, sem dispositivo, veredito residual mascarado)",
+  "kfold_5x_balanced": {
+    "mean_f1": 0.4909779582966717,
+    "std_f1": 0.07045756673317659,
+    "ci_95": [
+      0.40349333428304696,
+      0.5784625823102965
+    ],
+    "mean_acc": 0.912458734680957,
+    "per_class_f1": {
+      "Irregular": 0.9579103506875711,
+      "Regular com Ressalva": 0.3990528282317481,
+      "Regular": 0.11597069597069598
+    },
+    "confusion_matrix": [
+      [
+        3231,
+        75,
+        4
+      ],
+      [
+        150,
+        87,
+        4
+      ],
+      [
+        55,
+        31,
+        7
+      ]
+    ]
+  },
+  "kfold_5x_sem_pesos": {
+    "mean_f1": 0.3173233893115558,
+    "per_class_f1": {
+      "Irregular": 0.9519701679346673,
+      "Regular com Ressalva": 0.0,
+      "Regular": 0.0
+    }
+  },
+  "holdout_temporal_2024": {
+    "f1_macro": 0.41218442574374775,
+    "accuracy": 0.8702290076335878,
+    "f1_por_classe": {
+      "Irregular": 0.9314685314685315,
+      "Regular com Ressalva": 0.3050847457627119,
+      "Regular": 0.0
+    },
+    "confusion_matrix": [
+      [
+        333,
+        10,
+        0
+      ],
+      [
+        29,
+        9,
+        0
+      ],
+      [
+        10,
+        2,
+        0
+      ]
+    ],
+    "class_weight": "balanced"
+  }
+}

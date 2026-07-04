@@ -6,12 +6,10 @@ data/interim/*
 data/processed/*
 !data/processed/.gitkeep
 
-# Resultados e figuras — gerados pelos notebooks, não versionar
+# Figuras e modelos — regenerados pelos notebooks
 resultados/figuras/*
 !resultados/figuras/.gitkeep
 resultados/modelos/
-resultados/*.json
-resultados/*.csv
 
 # Pesos e checkpoints de modelos
 *.pt

@@ -1,0 +1,29 @@
+{
+  "modelo": "LegalBert-pt + LoRA",
+  "feature": "VOTO_LIMPO",
+  "loss": "weighted_ce",
+  "usar_lora": true,
+  "usar_gpu": true,
+  "hiperparametros": {
+    "n_splits": 5,
+    "max_length": 512,
+    "epochs": 5,
+    "batch_size": 16
+  },
+  "kfold": {
+    "mean_f1": 0.3294147447726898,
+    "std_f1": 0.013639019324428328,
+    "ci_95": [
+      0.31247966550674167,
+      0.3463498240386379
+    ],
+    "mean_acc": 0.8570135968284116,
+    "fold_scores": [
+      0.352835053603787,
+      0.3297269231848671,
+      0.3237693762092888,
+      0.32022808732486147,
+      0.3205142835406444
+    ]
+  }
+}

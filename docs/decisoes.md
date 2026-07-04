@@ -49,10 +49,11 @@ Nove anos (2016–2024) executados em pipeline único. Split padrão:
 
 `dividir_estratificado()` continua disponível como fallback para corpora pequenos.
 
-## D2-06 — Sem carregar resultados antigos
+## D2-06 — Resultados versionados, figuras regeneradas
 
-Nenhum arquivo `resultados/*.json` ou `resultados/figuras/*.png` é versionado.
-`resultados/` só ganha conteúdo quando os notebooks são executados de novo.
+Arquivos `resultados/*.json` são versionados no git (métricas finais dos experimentos).
+Figuras (`resultados/figuras/`) e checkpoints de modelos não são versionados —
+regenerados pelos notebooks quando executados.
 
 ## D2-07 — Random state fixo
 

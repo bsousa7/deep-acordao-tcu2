@@ -1,0 +1,30 @@
+{
+  "modelo": "Arquiteturas para Documentos Longos",
+  "feature": "VOTO_LIMPO",
+  "usar_gpu": true,
+  "head_tail": {
+    "estrategia": "head+tail",
+    "hiperparametros": {
+      "head_tokens": 256,
+      "tail_tokens": 254,
+      "epochs": 5,
+      "batch_size": 16,
+      "n_splits": 5,
+      "usar_lora": true
+    },
+    "mean_f1": 0.33488564708234725,
+    "std_f1": 0.01905260557919064,
+    "ci_95": [
+      0.31122871266269003,
+      0.35854258150200446
+    ],
+    "mean_acc": 0.8778889491852455,
+    "fold_scores": [
+      0.3580858627290129,
+      0.33367890264113687,
+      0.3157641395908544,
+      0.3499200134714153,
+      0.31697931697931697
+    ]
+  }
+}
