@@ -6,9 +6,7 @@ data/interim/*
 data/processed/*
 !data/processed/.gitkeep
 
-# Figuras e modelos — regenerados pelos notebooks
-resultados/figuras/*
-!resultados/figuras/.gitkeep
+# Modelos — regenerados pelos notebooks
 resultados/modelos/
 
 # Pesos e checkpoints de modelos
